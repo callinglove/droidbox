@@ -7,7 +7,7 @@ WORKDIR /opt
 
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV ANDROID_SDK_HOME /opt/android-sdk-linux
 ENV PATH ${PATH}:$JAVA_HOME/bin:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
@@ -22,7 +22,7 @@ ADD droidbox.py.patch /build/
 RUN dpkg --add-architecture i386
 RUN apt-get update
 RUN apt-get -y dist-upgrade
-RUN apt-get install -y --no-install-recommends python-tk python-matplotlib openjdk-7-jre-headless apt-utils expect curl wget  git openssh-server libc6:i386 libncurses5:i386 libstdc++6:i386 bsdmainutils patch
+RUN apt-get install -y --no-install-recommends python-tk python-matplotlib openjdk-8-jre-headless apt-utils expect curl wget  git openssh-server libc6:i386 libncurses5:i386 libstdc++6:i386 bsdmainutils patch
 RUN curl -L https://raw.github.com/aikinci/android-sdk-installer/master/android-sdk-installer |sed 's/android-sdk-license-5be876d5/android-sdk-license-c81a61d9/'|bash /dev/stdin --dir=/opt --install=platform-tools,,android-16
 RUN curl -L https://raw.github.com/aikinci/android-sdk-installer/master/android-sdk-installer |sed 's/wget/#wget/' |sed 's/tar/#tar/' | bash /dev/stdin --dir=/opt --install=system-image,android-16
 RUN android create avd -n droidbox -t 1 -d 7
